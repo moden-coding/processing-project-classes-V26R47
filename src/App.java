@@ -1,9 +1,11 @@
 import processing.core.*;
+import java.util.ArrayList;
 
 public class App extends PApplet{
     Box box1;
     Box box2;
     Box box3;
+    ArrayList<Box> boxes;
     public static void main(String[] args)  {
         PApplet.main("App");
     }
@@ -12,6 +14,7 @@ public class App extends PApplet{
         box1 = new Box(50, 100, this);
         box2 = new Box(150, 100, this);
         box3 = new Box(250, 100, this);
+        boxes = new ArrayList<>();
     }
 
     public void settings() {
@@ -29,7 +32,20 @@ public class App extends PApplet{
     public void keyPressed(){
         if(keyCode == RIGHT) {
             if(box1.getValue() == box2.getValue()) {
-                box2 =  startValue * 2;
+                box2.doubleValue();
+                box1.resetValue();
+            } else if(box2.getValue() == box3.getValue()) {
+                box3.doubleValue();
+                box2.resetValue();
+            }
+        }
+        if(keyCode == LEFT) {
+            if(box3.getValue() == box2.getValue()) {
+                box2.doubleValue();
+                box3.resetValue();
+            } else if(box2.getValue() == box3.getValue()) {
+                box1.doubleValue();
+                box2.resetValue();
             }
         }
     }
