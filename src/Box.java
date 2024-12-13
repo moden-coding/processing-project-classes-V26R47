@@ -5,7 +5,7 @@ public class Box {
     private int y;
     private int size;
     private PApplet canvas;
-    private int startValue;
+    public int startValue;
 
 
     public Box(int xPos, int yPos, PApplet b) {
@@ -16,9 +16,17 @@ public class Box {
         startValue = 10;
     }
     public void display(){
+        canvas.fill(255);
         canvas.square(x, y, size);
+        canvas.fill(0);
+        canvas.textSize(50);
+        canvas.text(startValue, x + 25, y + 75);
     }
     public void boxValue(){
-        text(startValue);
+        
     }   
+
+    public int getValue(){
+        return startValue;
+    }
 }
