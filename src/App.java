@@ -15,6 +15,13 @@ public class App extends PApplet{
         box2 = new Box(150, 100, this);
         box3 = new Box(250, 100, this);
         boxes = new ArrayList<>();
+        box1 = new Box(50, 100, this);
+        int count = 0;
+        if(count > 0){
+            boxes.add(box1 + 100, 0, this);
+            
+        }
+
     }
 
     public void settings() {
@@ -30,6 +37,9 @@ public class App extends PApplet{
     }
 
     public void keyPressed(){
+        if(keyCode == ' '){
+            boxes.add(box);
+        }
         if(keyCode == RIGHT) {
             if(box1.getValue() == box2.getValue()) {
                 box2.doubleValue();

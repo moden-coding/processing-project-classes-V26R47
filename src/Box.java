@@ -1,8 +1,8 @@
 import processing.core.PApplet;
 
 public class Box {
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     private int size;
     private PApplet canvas;
     public int startValue;
@@ -37,5 +37,8 @@ public class Box {
     }
     public void resetValue(){
         boxValue = startValue;
+    }
+    public int addBox{
+        
     }
 }
