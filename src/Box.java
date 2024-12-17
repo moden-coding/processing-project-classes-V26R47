@@ -38,7 +38,4 @@ public class Box {
     public void resetValue(){
         boxValue = startValue;
     }
-    public int addBox{
-        
-    }
 }
