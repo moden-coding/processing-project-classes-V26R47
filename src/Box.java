@@ -24,8 +24,8 @@ public class Box {
         canvas.textSize(50);
         canvas.text(boxValue, x + 25, y + 75);
     }
-    public void boxValue(){
-        
+    public void setValue(int value){
+        boxValue = value;
     }   
 
     public int getValue(){
@@ -36,6 +36,6 @@ public class Box {
         boxValue *= 2;
     }
     public void resetValue(){
-        boxValue = startValue;
+        boxValue = 0;
     }
 }

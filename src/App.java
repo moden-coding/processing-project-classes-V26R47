@@ -1,31 +1,27 @@
 import processing.core.*;
 import java.util.ArrayList;
 
-public class App extends PApplet{
-    // Box box1;
-    // Box box2;
-    // Box box3;
+public class App extends PApplet {
     ArrayList<Box> boxes;
     public static void main(String[] args)  {
         PApplet.main("App");
     }
 
     public void setup(){
-        // box1 = new Box(50, 100, this);
-        // box2 = new Box(150, 100, this);
-        // box3 = new Box(250, 100, this);
         boxes = new ArrayList<>();
         int x = 50;
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 4; i++){
             Box box = new Box(x, 100, this);
             boxes.add(box);
             x += 100;
         }
+        // boxes.add(new Box(350, 100, this));
+        // boxes.get(3).setValue(0);
 
     }
 
     public void settings() {
-        size(400,600);
+        size(500,600);
         
     }
 
@@ -34,37 +30,51 @@ public class App extends PApplet{
        for(Box b: boxes){
         b.display();
        }
-    //    box1.display();
-    //    box2.display();
-    //    box3.display();
     }
 
     public void keyPressed(){
-        // if(keyCode == ' '){
-        //     boxes.add(box);
-        // }
-        // if(keyCode == RIGHT) {
-        //     if(box1.getValue() == box2.getValue()) {
-        //         box2.doubleValue();
-        //         box1.resetValue();
-        //     } else if(box2.getValue() == box3.getValue()) {
-        //         box3.doubleValue();
-        //         box2.resetValue();
-        //     }
-        // }
+        if(keyCode == RIGHT) {
+            System.out.println("right");
+            for (int j = 0; j < boxes.size()-1; j++){
+                Box right = boxes.get(j +2);
+                Box mid = boxes.get(j + 1);
+                for(int d = 3; d < 0; d--){
+                if(mid.getValue() == right.getValue()) {
+                    right.doubleValue();
+                    shiftValues(j);
+                    // mid.resetValue();
+                    // boxes.get(boxes.size()-1).resetValue();    
+            }
+            }
+        }
+        }
+    
+
         if(keyCode == LEFT) {
+            System.out.println("left");
             for (int i = 0; i < boxes.size()-1; i++){
                 Box left = boxes.get(i);
-                Box mid = boxes.get(i+1);
-                // Box right = boxes.get(i+2);
-                if(mid.getValue() == left.getValue()) {
+                Box mid2 = boxes.get(i + 1);
+                for(int d2 = 0; d2 < 3; d2++){
+                if(mid2.getValue() == left.getValue()) {
                     left.doubleValue();
-                    mid.resetValue();    
-            }
-            }// } else if(box2.getValue() == box3.getValue()) {
+                    shiftValues(i);
+                    // mid.resetValue();
+                    boxes.get(boxes.size()-1).resetValue();    
+                }
+                }
+            }   // } else if(box2.getValue() == box3.getValue()) {
             //     box1.doubleValue();
             //     box2.resetValue();
             // }
+    
+        }
+    }
+    public void shiftValues(int index){
+        for(int start = index + 1; start < boxes.size() - 1; start++){
+            Box currentBox = boxes.get(start);
+            Box nextBox = boxes.get(start + 1);
+            currentBox.setValue(nextBox.getValue());
         }
     }
 }
