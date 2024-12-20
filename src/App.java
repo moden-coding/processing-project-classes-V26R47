@@ -1,13 +1,20 @@
 import processing.core.*;
+
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App extends PApplet {
     ArrayList<Box> boxes;
+    int scene;
+    int highScore;
     public static void main(String[] args)  {
         PApplet.main("App");
     }
 
     public void setup(){
+        highScore = 0;
+        readHighScore();
         boxes = new ArrayList<>();
         int x = 50;
         for(int i = 0; i < 4; i++){
@@ -15,6 +22,7 @@ public class App extends PApplet {
             boxes.add(box);
             x += 100;
         }
+        scene = 0;
         // boxes.add(new Box(350, 100, this));
         // boxes.get(3).setValue(0);
 
@@ -30,17 +38,32 @@ public class App extends PApplet {
         for(Box b: boxes){
             b.display();
         }
+        int index = 0;
+        for(boxes.get(index); index < boxes.size(); index++){
+        if(scene == 0){
         fill(255);
         textSize(50);
-        int index = 0;
-        int highScore = 0;
-        if(index < boxes.size() - 2){
-            if(boxes.get(index).getValue() > highScore){
-                highScore = boxes.get(index).getValue();
-                index++;
+        int number = 0;
+        if(number < boxes.size() - 2){
+            if(boxes.get(number).getValue() > highScore){
+                highScore = boxes.get(number).getValue();
+                number++;
             }
+            text("High score:" + highScore, 50, 100);
         }
-        text("High score:" , 50, 100);
+        // } else if(keyCode == LEFT || keyCode == RIGHT){
+        //     fill(255);
+        //     textSize(50);
+        //     int index = 0;
+        //     if(index > boxes.size() - 2){
+        //         index = boxes.get(0).getValue();
+        //         if(boxes.get(index).getValue() > highScore){
+        //             highScore = boxes.get(index).getValue();
+        //             index++;
+        //         }
+        // }
+        }
+    }
     }
 
     public void keyPressed(){
@@ -95,5 +118,20 @@ public class App extends PApplet {
             Box left = boxes.get(start - 1);
             right.setValue(left.getValue());
         }
+    }
+    public void readHighScore(){
+        try (Scanner scanner = new Scanner(Paths.get("highScore.txt"))) {
+
+    // we read the file until all lines have been read
+        while (scanner.hasNextLine()) {
+        // we read one line
+            String row = scanner.nextLine();
+        // we print the line that we read
+            highScore = Integer.valueOf(row);
+        }
+    } catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+
     }
 }
